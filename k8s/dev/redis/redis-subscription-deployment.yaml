@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-subscription
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-subscription
+  template:
+    metadata:
+      labels:
+        app: redis-subscription
+    spec:
+      containers:
+        - name: redis-subscription
+          image: redis:5.0-alpine
+          command: ["redis-server", "--save", "20", "1", "--loglevel", "warning", "--requirepass", "admin*2024*staging"]
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-subscription-volume
+              mountPath: /data
+      volumes:
+        - name: redis-subscription-volume
+          persistentVolumeClaim:
+            claimName: redis-subscription-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-subscription-service
+spec:
+  ports:
+    - port: 6378
+      targetPort: 6379
+  selector:
+    app: redis-subscription
