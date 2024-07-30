@@ -38,10 +38,12 @@ kind: Service
 metadata:
   name: no-code-db-service
 spec:
-  type: NodePort
+  selector:
+    app: no-code-db-service
+  type: LoadBalancer
   ports:
-    - port: 4001
+    - protocol : TCP
+      port: 4001
       targetPort: 4001
       nodePort: 30041
-  selector:
-    app: no-code-db
+
