@@ -36,8 +36,9 @@ kind: Service
 metadata:
   name: pg-admin-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
+    - protocol: TCP
     - port: 4002
       targetPort: 80
       nodePort: 30042
