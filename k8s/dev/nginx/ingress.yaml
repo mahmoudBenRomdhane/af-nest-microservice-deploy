@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress
 spec:
   rules:
-  - host: localhost
+  - host: minikube.local
     http:
       paths:
       - path: /
