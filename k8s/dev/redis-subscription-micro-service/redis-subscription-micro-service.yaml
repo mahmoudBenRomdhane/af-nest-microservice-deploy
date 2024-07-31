@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-subscription-micro-service
+  labels:
+    app: redis-subscription-micro-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-subscription-micro-service
+  template:
+    metadata:
+      labels:
+        app: redis-subscription-micro-service
+    spec:
+      containers:
+        - name: redis-subscription-micro-service
+          image: nocodb/nocodb:0.202.5
+          ports:
+            - containerPort: 4001
+          env:
+            - name: NC_INVITE_ONLY_SIGNUP
+              value: 'true'
+            - name: NC_DISABLE_TELE
+              value: 'true'
+            - name: NC_DB
+              value: 'pg://postgres:5432?u=admin&p=admin*2024*staging&d=noco-db&pool.min=0'
+            - name: NC_ADMIN_EMAIL
+              value: 'admin@arsela.co'
+            - name: NC_ADMIN_PASSWORD
+              value: 'admin*2024*staging'
+            - name: PORT
+              value: '4001'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: no-code-db-service
+spec:
+  type: NodePort
+  ports:
+    - port: 4001
+      targetPort: 4001
+      nodePort: 30041
+  selector:
+    app: no-code-db
