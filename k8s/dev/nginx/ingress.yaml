@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress
 spec:
   rules:
-  - host: "196.203.106.65"
+  - host: api.staging.af.arsela.cloud
     http:
       paths:
       - path: /
@@ -14,3 +14,4 @@ spec:
             name: nginx-service
             port:
               number: 80
+
