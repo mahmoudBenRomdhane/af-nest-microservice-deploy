@@ -43,6 +43,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 4002
-      nodePort: 30041
+      nodePort: 30042
   selector:
     app: pg-admin
