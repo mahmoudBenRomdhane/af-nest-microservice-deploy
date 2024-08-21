@@ -25,7 +25,7 @@ spec:
         - name: APP_NAME
           value: gateway
         - name: APP_KEY
-          value: 3dIBwrBMhwrME9WiCsOFYrBMhwrMEfcLrBMhwrMEa
+          value: "3dIBwrBMhwrME9WiCsOFYrBMhwrMEfcLrBMhwrMEa"
         - name: COGNITO_USER_POOL_ID
           value: "eu-north-1_CqUJmma6l"
         - name: COGNITO_CLIENT_ID
