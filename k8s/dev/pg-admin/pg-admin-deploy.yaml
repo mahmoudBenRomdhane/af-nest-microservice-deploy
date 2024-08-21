@@ -36,13 +36,10 @@ kind: Service
 metadata:
   name: pg-admin-service
 spec:
-  selector:
-    app: pg-admin
   type: NodePort
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 4002
+    - port: 4002
+      targetPort: 80
       nodePort: 30042
   selector:
     app: pg-admin
