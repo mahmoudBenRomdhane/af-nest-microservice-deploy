@@ -32,8 +32,8 @@ spec:
           value: "3vrhnmreik0fcqrtj5tguf6hgb"
         - name: COGNITO_REGION
           value: "eu-north-1"
-        # - name: JWT_SECRET
-        #   value: "HELLO"
+        - name: JWT_SECRET
+          value: "HELLO"
         # - name: JWT_EXPIRE_IN
         #   value: "86400"
 ---
