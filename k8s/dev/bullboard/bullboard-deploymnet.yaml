@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bullboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bullboard
+  template:
+    metadata:
+      labels:
+        app: bullboard
+    spec:
+      containers:
+      - name: bullboard
+        image: deadly0/bull-board
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          value: "admin*2024*staging"
+        - name: BULL_PREFIX
+          value: "bull"
+        - name: USER_LOGIN
+          value: "admin"
+        - name: USER_PASSWORD
+          value: "admin*2024*staging"
+        restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bullboard-service
+spec:
+  type: NodePort
+  selector:
+    app: bullboard
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30030
