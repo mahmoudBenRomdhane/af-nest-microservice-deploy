@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apollo-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apollo-gateway
+  template:
+    metadata:
+      labels:
+        app: apollo-gateway
+    spec:
+      containers:
+      - name: apollo-gateway
+        image: mahmoudarsela/gateway
+        ports:
+        - containerPort: 5001
+        env:
+        - name: NODE_ENV
+          value: development
+        - name : APP_PORT
+          value: 5001
+        - name: APP_NAME
+          value: gateway
+        - name: APP_KEY
+          value: 3dIBwrBMhwrME9WiCsOFYrBMhwrMEfcLrBMhwrMEa
+        - name: COGNITO_USER_POOL_ID
+          value: "eu-north-1_CqUJmma6l"
+        - name: COGNITO_CLIENT_ID
+          value: "3vrhnmreik0fcqrtj5tguf6hgb"
+        - name: COGNITO_REGION
+          value: "eu-north-1"
+        - name : JWT_SECRET
+          value: HELLO
+        - name : JWT_EXPIRE_IN
+          value: 3600*24
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+spec:
+  type: NodePort
+  ports:
+    - port: 5001
+      targetPort: 5001
+      nodePort: 30051
+  selector:
+    app: apollo-gateway
