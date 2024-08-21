@@ -38,10 +38,10 @@ metadata:
 spec:
   selector:
     app: pg-admin
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
-      port: 4002
+      port: 80
       targetPort: 4002
       nodePort: 30042
   selector:
