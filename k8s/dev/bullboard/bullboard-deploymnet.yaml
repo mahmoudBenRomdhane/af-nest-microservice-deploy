@@ -30,7 +30,6 @@ spec:
           value: "admin"
         - name: USER_PASSWORD
           value: "admin*2024*staging"
-        restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
