@@ -35,7 +35,7 @@ spec:
         - name : JWT_SECRET
           value: HELLO
         - name : JWT_EXPIRE_IN
-          value: 3600*24
+          value: "86400"
 
 ---
 apiVersion: v1
