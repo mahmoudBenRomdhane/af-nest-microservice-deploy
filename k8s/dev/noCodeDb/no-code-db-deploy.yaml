@@ -25,11 +25,11 @@ spec:
             - name: NC_DISABLE_TELE
               value: 'true'
             - name: NC_DB
-              value: 'pg://postgres:5432?u=admin&p=admin2024staging&d=noco-db&pool.min=0'
+              value: 'pg://postgres:5432?u=admin&p=admin*2024*staging&d=noco-db&pool.min=0'
             - name: NC_ADMIN_EMAIL
               value: 'admin@arsela.co'
             - name: NC_ADMIN_PASSWORD
-              value: 'admin2024staging'
+              value: 'admin*2024*staging'
             - name: PORT
               value: '4001'
 ---
