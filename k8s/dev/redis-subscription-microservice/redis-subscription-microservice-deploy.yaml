@@ -27,11 +27,11 @@ spec:
             - name: DATABASE_USER
               value: admin
             - name: DATABASE_PASSWORD
-              value: admin*2023
+              value: "admin*2023"
             - name: REDIS_SUBSCRIPTION_HOST
               value: redis-subscription-service
             - name: REDIS_SUBSCRIPTION_PORT
-              value: 6378
+              value: "6378"
           
           
 ---
