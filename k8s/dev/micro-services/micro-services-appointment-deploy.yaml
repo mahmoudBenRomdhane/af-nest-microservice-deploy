@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-appointment
+  labels:
+    app: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice
+  template:
+    metadata:
+      labels:
+        app: microservice
+    spec:
+      containers:
+      - name: micro-appointment
+        image: mahmoudarsela/micro-appointment
+        ports:
+        - containerPort: 5012
+        env:
+          - name: NODE_ENV
+            value: production
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_USER
+            value: admin
+          - name: DATABASE_PASSWORD
+            value: admin*2023
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-appointment
+  labels:
+    app: microservice
+spec:
+  ports:
+  - port: 5012
+    targetPort: 5012
+  selector:
+    app: micro-appointment
+
