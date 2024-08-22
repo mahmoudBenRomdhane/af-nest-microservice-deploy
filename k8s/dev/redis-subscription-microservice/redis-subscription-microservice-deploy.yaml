@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-subscription-micro-service
+  labels:
+    app: pg-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-subscription-micro-service
+  template:
+    metadata:
+      labels:
+        app: redis-subscription-micro-service
+    spec:
+      containers:
+        - name: redis-subscription-micro-service
+          image: mahmoudarsela/micro-redis-subscription
+          ports:
+            - containerPort: 5020
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_USER
+              value: admin
+            - name: DATABASE_PASSWORD
+              value: admin*2023
+            - name: REDIS_SUBSCRIPTION_HOST
+              value: redis-subscription-service
+            - name: REDIS_SUBSCRIPTION_PORT
+              value: 6378
+          
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-subscription-micro-service
+spec:
+  type: NodePort
+  ports:
+    - port: 5020
+      targetPort: 5020
+      nodePort: 30052
+  selector:
+    app: redis-subscription-micro-service
